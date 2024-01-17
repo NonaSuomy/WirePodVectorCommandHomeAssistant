@@ -84,7 +84,7 @@ services:
 docker compose up -d
 ```
 
-## Compiling ##
+## Compile ##
 
 After that attach to the docker
 
@@ -106,6 +106,18 @@ url := "http://HAIPHERE:8123/api/conversation/process" // Replace with your Home
 token := "LONGTOKENHERE" // Replace with your token
 ```
 
+# AgentID #
+
+If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "HomeLLM" etc, to the middle one. Otherwise, it will use the default one.
+
+```C
+//AgentID string `json:"agent_id"`
+
+//agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in yaml view or try the name)
+
+//AgentID: agentID,
+```
+# Compiling #
 Compile the GO plugin to the root directory of /wire-pod/chipper/plugins 
 ```bash
 sudo /usr/local/go/bin/go build -buildmode=plugin -o /wire-pod/chipper/plugins/commandha.so commandha.go
