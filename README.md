@@ -107,7 +107,7 @@ token := "LONGTOKENHERE" // Replace with your token
 //agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in yaml view or try the name)
 ```
 
-# AgentID #
+### AgentID ###
 
 If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "HomeLLM" etc, to the middle one. Otherwise, it will use the default one.
 
@@ -118,7 +118,7 @@ If you want Vector to use a specific Agent ID you setup for him under assist man
 
 //AgentID: agentID,
 ```
-# Compiling #
+### Compiling ###
 Compile the GO plugin to the root directory of /wire-pod/chipper/plugins 
 ```bash
 sudo /usr/local/go/bin/go build -buildmode=plugin -o /wire-pod/chipper/plugins/commandha.so commandha.go
@@ -248,6 +248,20 @@ Using general recognizer
 Bot 00###### Transcribed text: assist
 Bot 00###### matched plugin Home Assistant Control, executing function
 Bot 00###### plugin Home Assistant Control, response Sorry, I couldn't understand that
+```
+
+### Using a different Agent ID (HomeLLM) ###
+https://github.com/acon96/home-llm
+```
+Bot 00###### Stream type: OPUS
+(Bot 00######, Vosk) Processing...
+Using general recognizer
+(Bot 00######) End of speech detected.
+Bot 00###### Transcribed text: assist what does the fox say
+Bot 00###### matched plugin Home Assistant Control, executing function
+Bot 00###### plugin Home Assistant Control, response The fox does not say.
+This is a custom intent or plugin!
+Bot 00###### request served.
 ```
 
 ## Useful links ##
