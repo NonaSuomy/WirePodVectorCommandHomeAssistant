@@ -1,4 +1,4 @@
-# WirePodVectorCommandHomeAssistant
+# Wire-Pod Vector Command HomeAssistant
 Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home Assistant via the Conversation API
 
 ![vector-vector-robot](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/8ca0d3bf-df97-4cc2-b1a1-89dbe5d1865e)
