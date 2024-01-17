@@ -104,6 +104,7 @@ Edit the commandha.go file to add your long-lived access token and the IP of you
 ```
 url := "http://HAIPHERE:8123/api/conversation/process" // Replace with your Home Assistant IP
 token := "LONGTOKENHERE" // Replace with your token
+//agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in yaml view or try the name)
 ```
 
 # AgentID #
