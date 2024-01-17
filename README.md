@@ -91,7 +91,7 @@ wirepod@escapepod:/wire-pod/chipper$
 cd plugins
 mkdir commandha
 cd commandha
-wget someurlhere
+wget https://raw.githubusercontent.com/NonaSuomy/WirePodVectorCommandHomeAssistant/main/commandha.go
 ```
 Edit the commandha.go file to add your long-lived access token and the IP of your HA instance
 
