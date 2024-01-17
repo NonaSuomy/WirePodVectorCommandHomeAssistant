@@ -3,6 +3,8 @@ Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home As
 
 ![vector-vector-robot](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/8ca0d3bf-df97-4cc2-b1a1-89dbe5d1865e)
 
+https://youtube.com/shorts/i7WPcnAWji8
+
 ## Docker ##
 I use docker to run Vector with Wire-Pod my configuration looks like this:
 
