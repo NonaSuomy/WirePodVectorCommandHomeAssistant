@@ -19,6 +19,7 @@ var Utterances = []string{"assist"} // Trigger word
 var Name = "Home Assistant Control"
 
 type RequestBody struct {
+        //AgentID string `json:"agent_id"`
         Text string `json:"text"`
 }
 
@@ -45,8 +46,10 @@ func Action(transcribedText string, botSerial string, guid string, target string
 
         url := "http://HAIPHERE:8123/api/conversation/process" // Replace with your Home Assistant IP
         token := "LongLiveTokenHere" // Replace with your token
-
+        //agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in yaml view or try the name)
+        
         requestBody := &RequestBody{
+                //AgentID: agentID,
                 Text: command,
         }
         jsonValue, _ := json.Marshal(requestBody)
