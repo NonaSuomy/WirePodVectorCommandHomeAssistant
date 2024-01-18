@@ -50,7 +50,11 @@ Once the installation ends, browse to http://GPUServerIP:7860/?__theme=dark.
 
 Download the gguf file from acon96/Home-3B-v2-GGUF and Home-3B-v2.q8_0.gguf for max GPU potential in the text-generation-webui.
 
+Select the reload button when it is done downloading (2.8G) the file Home-3B-v2.q8_0.gguf should show up in the Model list then hit Load and Save settings.
+
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/8899f18c-a6af-4ba8-87b2-ed9719de7820)
+
+
 
 Performance of running the model on a Raspberry Pi
 
