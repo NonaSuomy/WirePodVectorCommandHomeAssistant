@@ -46,7 +46,7 @@ Run the start_linux.sh, start_windows.bat, start_macos.sh, or start_wsl.bat scri
 
 Select your GPU vendor when asked.
 
-Once the installation ends, browse to http://localhost:7860/?__theme=dark.
+Once the installation ends, browse to http://GPUServerIP:7860/?__theme=dark.
 
 Download the gguf file from acon96/Home-3B-v1-GGUF in the text-generation-webui.
 
