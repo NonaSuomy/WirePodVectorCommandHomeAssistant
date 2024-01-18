@@ -40,7 +40,7 @@ networks:
 
 Clone or download the repository https://github.com/oobabooga/text-generation-webui install it however you please I just run it on the metal of a GPU server.
 
-Edit CMD_FLAGS.txt before installing uncomment the line `# --listen --api` (Remove the number sign and space) I also added `--model home-3b-v1.q8_0.gguf --n-gpu-layers 33` for my GPU to start the model on boot.
+Edit CMD_FLAGS.txt before installing uncomment the line `# --listen --api` (Remove the number sign and space) I also added `--model Home-3B-v2.q8_0.gguf --n-gpu-layers 33` for my GPU to start the model on boot.
 
 Run the start_linux.sh, start_windows.bat, start_macos.sh, or start_wsl.bat script depending on your OS.
 
@@ -48,7 +48,9 @@ Select your GPU vendor when asked.
 
 Once the installation ends, browse to http://GPUServerIP:7860/?__theme=dark.
 
-Download the gguf file from acon96/Home-3B-v1-GGUF in the text-generation-webui.
+Download the gguf file from acon96/Home-3B-v2-GGUF and Home-3B-v2.q8_0.gguf for max GPU potential in the text-generation-webui.
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/8899f18c-a6af-4ba8-87b2-ed9719de7820)
 
 Performance of running the model on a Raspberry Pi
 
