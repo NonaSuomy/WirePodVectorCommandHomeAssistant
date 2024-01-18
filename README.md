@@ -40,7 +40,7 @@ networks:
 
 Clone or download the repository https://github.com/oobabooga/text-generation-webui install it however you please I just run it on the metal of a GPU server.
 
-Edit CMD_FLAGS.txt before installing uncomment the line `# --listen --api` (Remove the number sign and space) I also added --model home-3b-v1.q8_0.gguf --n-gpu-layers 33 for my GPU to start the model on boot.
+Edit CMD_FLAGS.txt before installing uncomment the line `# --listen --api` (Remove the number sign and space) I also added `--model home-3b-v1.q8_0.gguf --n-gpu-layers 33` for my GPU to start the model on boot.
 
 Run the start_linux.sh, start_windows.bat, start_macos.sh, or start_wsl.bat script depending on your OS.
 
