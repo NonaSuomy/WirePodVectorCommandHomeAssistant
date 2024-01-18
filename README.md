@@ -9,7 +9,192 @@ Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home As
 
 ^ https://youtube.com/shorts/i7WPcnAWji8 ^
 
-## Docker ##
+## Home Assistant Container for Docker ##
+
+```yaml
+#HomeAssistant Container for Docker
+version: "3.9"
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - /var/lib/libvirt/images/usb001/docker-storage/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    mac_address: de:ad:be:ef:00:08
+    networks:
+      - dhcp
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    restart: "no"
+    privileged: true
+
+networks:
+  dhcp:
+    name: dbrv100
+    external: true
+```
+
+## Home-LLM Container for Docker ##
+[![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a4cd755e-3d3f-435d-875a-e3eeb0b3e420)](https://my.home-assistant.io/redirect/hacs_repository/?category=Integration&repository=home-llm&owner=acon96)
+
+Clone or download the repository https://github.com/oobabooga/text-generation-webui install it however you please I just run it on the metal of a GPU server.
+
+Edit CMD_FLAGS.txt before installing uncomment the line `# --listen --api` (Remove the number sign and space) I also added --model home-3b-v1.q8_0.gguf --n-gpu-layers 33 for my GPU to start the model on boot.
+
+Run the start_linux.sh, start_windows.bat, start_macos.sh, or start_wsl.bat script depending on your OS.
+
+Select your GPU vendor when asked.
+
+Once the installation ends, browse to http://localhost:7860/?__theme=dark.
+
+Download the gguf file from acon96/Home-3B-v1-GGUF in the text-generation-webui.
+
+Performance of running the model on a Raspberry Pi
+
+The RPI4 4GB that I have was sitting right at 1.5 tokens/sec for prompt eval and 1.6 tokens/sec for token generation when running the Q4_K_M quant. I was reliably getting responses in 30-60 seconds after the initial prompt processing which took almost 5 minutes. It depends significantly on the number of devices that have been exposed as well as how many states have changed since the last invocation because of llama.cpp caches KV values for identical prompt prefixes.
+
+It is highly recommended to set up text-generation-webui on a separate machine that can take advantage of a GPU.
+
+Start-up on boot of the GPU server.
+```
+#/etc/systemd/system/textgen.service
+[Unit]
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/nonasuomy/code/text-generation-webui/start_linux.sh
+User=nonasuomy
+#Group=wheel
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Add the GPU server IP and port (7860) to your Home-LLM integration. 
+
+## Wyoming-Whisper Container for Docker ##
+
+[![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/9da6de53-17b8-4cf9-98a0-fd20e3651a9f)](https://my.home-assistant.io/redirect/supervisor_addon?addon=core_whisper)
+
+#### Manual Docker Config ####
+```yaml
+# docker run -it -p 10300:10300 -v /path/to/local/data:/data rhasspy/wyoming-whisper --model tiny-int8 --language en
+# Whisper Container for Docker
+version: "3.9"
+services:
+  wyoming-whisper:
+    image: rhasspy/wyoming-whisper:latest
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.monitor-only=false"
+    container_name: whisper
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/lib/libvirt/images/usb001/docker-storage/wyoming-whisper/data:/data
+      #- /etc/asound.conf:/etc/asound.conf
+    mac_address: "de:ad:be:ef:5e:34"
+    networks:
+      - dhcp
+    devices:
+      - /dev/snd:/dev/snd
+    ports:
+      - 10300:10300 # http
+    command: --model tiny-int8 --language en
+    restart: "no"
+networks:
+  dhcp:
+    name: "dbrv100"
+```
+
+## Wyoming-Piper Docker Container ##
+
+[![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/9da6de53-17b8-4cf9-98a0-fd20e3651a9f)](https://my.home-assistant.io/redirect/supervisor_addon?addon=core_piper)
+
+#### Manual Docker Config ####
+```yaml
+# docker run -it -p 10200:10200 -v /path/to/local/data:/data rhasspy/wyoming-piper --voice en-us-lessac-low
+# Piper Container for Docker
+version: "3.9"
+services:
+  wyoming-piper:
+    image: rhasspy/wyoming-piper:latest
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.monitor-only=false"
+    container_name: piper
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/lib/libvirt/images/usb001/docker-storage/wyoming-piper/data:/data
+    mac_address: "de:ad:be:ef:5e:35"
+    networks:
+      - dhcp
+    ports:
+      - 10200:10200 # http
+    command: --voice en-us-lessac-low
+    restart: "no"
+networks:
+  dhcp:
+    name: "dbrv100"
+```
+
+## Wyoming-OpenWakeWord Container for Docker ##
+
+[![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/9da6de53-17b8-4cf9-98a0-fd20e3651a9f)](https://my.home-assistant.io/redirect/supervisor_addon?addon=core_openwakeword)
+
+#### Manual Docker Config ####
+```yaml
+# Wyoming-OpenWakeWord Container for Docker
+version: "3.9"
+services:
+  wyomingopenwakeword:
+    container_name: "wyoming-openwakeword"
+    image: "rhasspy/wyoming-openwakeword:latest"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.monitor-only=false"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/lib/libvirt/images/usb001/docker-storage/wyoming-openwakeword/data:/data
+    mac_address: "de:ad:be:ef:5e:36"
+    hostname: "wyomingopenwakeword"
+    networks:
+      - dhcp
+    ports:
+      - 10400:10400
+    devices:
+      - /dev/snd:/dev/snd
+    command: --model 'ok_nabu' --model 'hey_jarvis' --model 'hey_rhasspy' --model 'hey_mycroft' --model 'alexa' --preload-model 'ok_nabu'    
+    # --uri 'tcp://0.0.0.0:10400'
+    restart: "no"
+    #restart: unless-stopped
+    #privileged: true
+    #network_mode: host
+
+networks:
+  dhcp:
+    name: "dbrv100"
+    external: true
+```
+[![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a57099e9-f9f0-4042-839e-2feebbd14580)](https://my.home-assistant.io/redirect/config_flow_start?domain=wyoming)
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a37d4221-d1f6-48a4-9218-e281709e72a4)
+
+In the Wyoming protocol integration click "Add Entry" and enter the IP and Port of the three Whisper/Piper/OpenWakeWord dockers so 10200, 10300, 10400, and their corresponding IP.
+
+Then go under the settings -> voice assistant -> add assistant.
+
+Name your assistant.
+
+Select your conversation agent like Home Assistant or your HomeLLM, etc.
+
+Then drop down the boxes for Faster-Whisper, Piper, and OpenWakeWord. Select the settings you like for each.
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/4c606111-b55b-4a4c-9d9c-ff0309b9c93a)
+
+## Wire-Pod Docker ##
+
 I use docker to run Vector with Wire-Pod my configuration looks like this:
 
 ```docker
