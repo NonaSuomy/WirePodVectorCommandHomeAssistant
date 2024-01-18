@@ -188,7 +188,7 @@ Bot 00###### Transcribed text: assist turn off the family room lights
 Bot 00###### matched plugin Home Assistant Control, executing function
 Bot 00###### plugin Home Assistant Control, response Turned off the lights
 ```
-Then turn the back on...
+Then turn it back on...
 ```
 This is a custom intent or plugin!
 Bot 00###### request served.
