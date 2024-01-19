@@ -78,6 +78,11 @@ User=nonasuomy
 WantedBy=multi-user.target
 ```
 
+```
+sudo systemctl enable textgen.service
+sudo systemctl start textgen.service
+```
+
 Add the GPU server IP and port (7860) to your Home-LLM integration. 
 
 ## Wyoming-Whisper Container for Docker ##
