@@ -35,7 +35,7 @@ networks:
     external: true
 ```
 
-## Home-LLM Container for Docker ##
+## Home-LLM on a GPU server ##
 [![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a4cd755e-3d3f-435d-875a-e3eeb0b3e420)](https://my.home-assistant.io/redirect/hacs_repository/?category=Integration&repository=home-llm&owner=acon96)
 
 Clone or download the repository https://github.com/oobabooga/text-generation-webui install it however you please I just run it on the metal of a GPU server.
