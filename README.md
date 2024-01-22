@@ -230,7 +230,7 @@ sudo systemctl status textgen.service
      CGroup: /system.slice/textgen.service
              ├─2499 /bin/bash /opt/text-generation-webui/start_linux.sh
              ├─2512 python one_click.py
-             ├─2517 /bin/sh -c ". \"/opt/text-generation-webui/installer_files/conda/etc/profile.d/conda.sh\" && conda activate \"/opt/text-generation-webui/installer_files/env\" && python server.py  --listen>
+             ├─2517 /bin/sh -c ". \"/opt/text-generation-webui/installer_files/conda/etc/profile.d/conda.sh\" && conda activate \"/opt/text-generation-webui/installer_files/env\" && python server.py  --listen --api --model Home-3B-v2.q8_0.gguf --n-gpu-layers 33"
              └─2520 python server.py --listen --api --model Home-3B-v2.q8_0.gguf --n-gpu-layers 33
 
 systemd[1]: Started textgen.service.
