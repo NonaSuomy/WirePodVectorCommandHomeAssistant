@@ -94,9 +94,8 @@ WantedBy=multi-user.target
 Add user textgen and to groups video/render
 
 ```bash
-sudo useradd -m textgen
+sudo useradd -m -s /bin/bash -G render,video textgen
 sudo passwd textgen
-sudo usermod -s /bin/bash -a -G render,video textgen
 id textgen
 uid=1001(textgen) gid=1001(textgen) groups=1001(textgen),44(video),109(render)
 sudo chown -R textgen:textgen /opt/text-generation-webui/
