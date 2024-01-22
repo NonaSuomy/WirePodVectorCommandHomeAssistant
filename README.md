@@ -96,7 +96,7 @@ Add user textgen and to groups video/render
 ```bash
 sudo useradd -m textgen
 sudo passwd textgen
-sudo usermod -a -G render,video textgen
+sudo usermod -s /bin/bash -a -G render,video textgen
 id textgen
 uid=1001(textgen) gid=1001(textgen) groups=1001(textgen),44(video),109(render)
 sudo chown -R textgen:textgen /opt/text-generation-webui/
@@ -105,6 +105,8 @@ sudo chown -R textgen:textgen /opt/text-generation-webui/
 Test your user to make sure it can run text-generation-webui
 
 ```bash
+su textgen
+cd /opt/text-generation-webui
 ./start_linux.sh
 08:11:51-750558 INFO     Starting Text generation web UI
 08:11:51-753175 WARNING
