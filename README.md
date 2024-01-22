@@ -83,9 +83,9 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/bin/bash /home/nonasuomy/code/text-generation-webui/start_linux.sh
-User=nonasuomy
-#Group=wheel
+ExecStart=/bin/bash /opt/code/text-generation-webui/start_linux.sh
+User=textgen
+Group=textgen
 
 [Install]
 WantedBy=multi-user.target
@@ -220,6 +220,12 @@ Then drop down the boxes for Faster-Whisper, Piper, and OpenWakeWord. Select the
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/4c606111-b55b-4a4c-9d9c-ff0309b9c93a)
 
+Then give it a test
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/673b4cea-828c-4df3-9156-7bd3d122385e)
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/5e92a85b-599c-43b0-93b7-bc29ecd269b1)
+
 ## Home Assistant Groups ##
 
 Currently, the model doesn't support turning off areas so you require this integration to get that working with the model
@@ -333,12 +339,12 @@ token := "LONGTOKENHERE" // Replace with your token
 
 ### AgentID ###
 
-If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "HomeLLM" etc, to the middle one. Otherwise, it will use the default one.
+If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "Home LLM" etc, to the middle one. Otherwise, it will use the default one.
 
 ```C
 //AgentID string `json:"agent_id"`
 
-//agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in yaml view or try the name)
+//agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in YAML view or try the name)
 
 //AgentID: agentID,
 ```
