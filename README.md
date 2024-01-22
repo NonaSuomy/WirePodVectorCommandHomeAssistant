@@ -201,6 +201,9 @@ networks:
     name: "dbrv100"
     external: true
 ```
+
+## Wyoming Protocol ##
+
 [![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a57099e9-f9f0-4042-839e-2feebbd14580)](https://my.home-assistant.io/redirect/config_flow_start?domain=wyoming)
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a37d4221-d1f6-48a4-9218-e281709e72a4)
@@ -216,6 +219,18 @@ Select your conversation agent like Home Assistant or your HomeLLM, etc.
 Then drop down the boxes for Faster-Whisper, Piper, and OpenWakeWord. Select the settings you like for each.
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/4c606111-b55b-4a4c-9d9c-ff0309b9c93a)
+
+## Home Assistant Groups ##
+
+Currently, the model doesn't support turning off areas so you require this integration to get that working with the model
+
+https://www.home-assistant.io/integrations/group/
+ 
+[![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a57099e9-f9f0-4042-839e-2feebbd14580)](https://my.home-assistant.io/redirect/config_flow_start?domain=group)
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/50e38f97-a88a-4e91-bfc6-ea9c25e5adcc)
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/7d32e0da-0f26-482f-b226-2ccbc8a19b13)
 
 ## Wire-Pod Docker ##
 
@@ -338,6 +353,7 @@ Restart your wirepod docker
 ```bash
 docker container restart wirepod
 ```
+
 ## Testing, testing, 123 ##
 
 In the console log you should see
