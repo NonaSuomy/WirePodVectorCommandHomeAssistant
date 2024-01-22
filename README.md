@@ -270,6 +270,8 @@ Select SUBMIT and hope for Success!
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a0d0ca6a-b2c4-4014-95db-ba30a45c2e27)
 
+
+
 ## Wyoming-Whisper Container for Docker ##
 
 [![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/9da6de53-17b8-4cf9-98a0-fd20e3651a9f)](https://my.home-assistant.io/redirect/supervisor_addon?addon=core_whisper)
@@ -515,7 +517,13 @@ token := "LONGTOKENHERE" // Replace with your token
 
 ### AgentID ###
 
-If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "Home LLM" etc, to the middle one. Otherwise, it will use the default one.
+If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "################################" etc, to the middle one. Otherwise, it will use the default one.
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/c155cd51-62f9-414b-9b48-b07f6b3e009c)
+
+Grab the agent_id:
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/06388744-a45b-4fce-aa7a-7e3a852043af)
 
 ```C
 //AgentID string `json:"agent_id"`
@@ -524,6 +532,9 @@ If you want Vector to use a specific Agent ID you setup for him under assist man
 
 //AgentID: agentID,
 ```
+
+**Note:** _If you delete and remake your agent in the HA setup it will generate a new AgentID which you will then have to recompile into this and restart the server/vector._
+
 ### Compiling ###
 Compile the GO plugin to the root directory of /wire-pod/chipper/plugins 
 ```bash
