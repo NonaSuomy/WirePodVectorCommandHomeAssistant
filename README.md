@@ -91,9 +91,147 @@ Group=textgen
 WantedBy=multi-user.target
 ```
 
+Add user textgen and to groups video/render
+
+```bash
+sudo useradd -m textgen
+sudo passwd textgen
+sudo usermod -a -G render,video textgen
+id textgen
+uid=1001(textgen) gid=1001(textgen) groups=1001(textgen),44(video),109(render)
+sudo chown -R textgen:textgen /opt/text-generation-webui/
 ```
+
+Test your user to make sure it can run text-generation-webui
+
+```bash
+./start_linux.sh
+08:11:51-750558 INFO     Starting Text generation web UI
+08:11:51-753175 WARNING
+                         You are potentially exposing the web UI to the entire internet without any access password.
+                         You can create one with the "--gradio-auth" flag like this:
+
+                         --gradio-auth username:password
+
+                         Make sure to replace username:password with your own.
+08:11:51-822630 INFO     Loading Home-3B-v2.q8_0.gguf
+08:11:51-907601 INFO     llama.cpp weights detected: models/Home-3B-v2.q8_0.gguf
+ggml_init_cublas: GGML_CUDA_FORCE_MMQ:   no
+ggml_init_cublas: CUDA_USE_TENSOR_CORES: yes
+ggml_init_cublas: found 1 ROCm devices:
+  Device 0: Radeon RX Vega, compute capability 9.0, VMM: no
+llama_model_loader: loaded meta data with 19 key-value pairs and 453 tensors from models/Home-3B-v2.q8_0.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = phi2
+llama_model_loader: - kv   1:                               general.name str              = Phi2
+llama_model_loader: - kv   2:                        phi2.context_length u32              = 2048
+llama_model_loader: - kv   3:                      phi2.embedding_length u32              = 2560
+llama_model_loader: - kv   4:                   phi2.feed_forward_length u32              = 10240
+llama_model_loader: - kv   5:                           phi2.block_count u32              = 32
+llama_model_loader: - kv   6:                  phi2.attention.head_count u32              = 32
+llama_model_loader: - kv   7:               phi2.attention.head_count_kv u32              = 32
+llama_model_loader: - kv   8:          phi2.attention.layer_norm_epsilon f32              = 0.000010
+llama_model_loader: - kv   9:                  phi2.rope.dimension_count u32              = 32
+llama_model_loader: - kv  10:                          general.file_type u32              = 7
+llama_model_loader: - kv  11:               tokenizer.ggml.add_bos_token bool             = false
+llama_model_loader: - kv  12:                       tokenizer.ggml.model str              = gpt2
+llama_model_loader: - kv  13:                      tokenizer.ggml.tokens arr[str,51200]   = ["!", "\"", "#", "$", "%", "&", "'", ...
+llama_model_loader: - kv  14:                  tokenizer.ggml.token_type arr[i32,51200]   = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  15:                      tokenizer.ggml.merges arr[str,50000]   = ["Ġ t", "Ġ a", "h e", "i n", "r e",...
+llama_model_loader: - kv  16:                tokenizer.ggml.bos_token_id u32              = 50296
+llama_model_loader: - kv  17:                tokenizer.ggml.eos_token_id u32              = 50297
+llama_model_loader: - kv  18:               general.quantization_version u32              = 2
+llama_model_loader: - type  f32:  259 tensors
+llama_model_loader: - type q8_0:  194 tensors
+llm_load_vocab: mismatch in special tokens definition ( 910/51200 vs 944/51200 ).
+llm_load_print_meta: format           = GGUF V3 (latest)
+llm_load_print_meta: arch             = phi2
+llm_load_print_meta: vocab type       = BPE
+llm_load_print_meta: n_vocab          = 51200
+llm_load_print_meta: n_merges         = 50000
+llm_load_print_meta: n_ctx_train      = 2048
+llm_load_print_meta: n_embd           = 2560
+llm_load_print_meta: n_head           = 32
+llm_load_print_meta: n_head_kv        = 32
+llm_load_print_meta: n_layer          = 32
+llm_load_print_meta: n_rot            = 32
+llm_load_print_meta: n_embd_head_k    = 80
+llm_load_print_meta: n_embd_head_v    = 80
+llm_load_print_meta: n_gqa            = 1
+llm_load_print_meta: n_embd_k_gqa     = 2560
+llm_load_print_meta: n_embd_v_gqa     = 2560
+llm_load_print_meta: f_norm_eps       = 1.0e-05
+llm_load_print_meta: f_norm_rms_eps   = 0.0e+00
+llm_load_print_meta: f_clamp_kqv      = 0.0e+00
+llm_load_print_meta: f_max_alibi_bias = 0.0e+00
+llm_load_print_meta: n_ff             = 10240
+llm_load_print_meta: n_expert         = 0
+llm_load_print_meta: n_expert_used    = 0
+llm_load_print_meta: rope scaling     = linear
+llm_load_print_meta: freq_base_train  = 10000.0
+llm_load_print_meta: freq_scale_train = 1
+llm_load_print_meta: n_yarn_orig_ctx  = 2048
+llm_load_print_meta: rope_finetuned   = unknown
+llm_load_print_meta: model type       = 3B
+llm_load_print_meta: model ftype      = Q8_0
+llm_load_print_meta: model params     = 2.78 B
+llm_load_print_meta: model size       = 2.75 GiB (8.51 BPW)
+llm_load_print_meta: general.name     = Phi2
+llm_load_print_meta: BOS token        = 50296 '<|im_start|>'
+llm_load_print_meta: EOS token        = 50297 '<|im_end|>'
+llm_load_print_meta: LF token         = 128 'Ä'
+llm_load_tensors: ggml ctx size =    0.35 MiB
+llm_load_tensors: offloading 32 repeating layers to GPU
+llm_load_tensors: offloading non-repeating layers to GPU
+llm_load_tensors: offloaded 33/33 layers to GPU
+llm_load_tensors:      ROCm0 buffer size =  2686.46 MiB
+llm_load_tensors:        CPU buffer size =   132.81 MiB
+............................................................................................
+llama_new_context_with_model: n_ctx      = 2048
+llama_new_context_with_model: freq_base  = 10000.0
+llama_new_context_with_model: freq_scale = 1
+llama_kv_cache_init:      ROCm0 KV buffer size =   640.00 MiB
+llama_new_context_with_model: KV self size  =  640.00 MiB, K (f16):  320.00 MiB, V (f16):  320.00 MiB
+llama_new_context_with_model: graph splits (measure): 3
+llama_new_context_with_model:      ROCm0 compute buffer size =   147.00 MiB
+llama_new_context_with_model:  ROCm_Host compute buffer size =     9.00 MiB
+AVX = 1 | AVX_VNNI = 0 | AVX2 = 1 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | FMA = 1 | NEON = 0 | ARM_FMA = 0 | F16C = 1 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 1 | SSE3 = 1 | SSSE3 = 1 | VSX = 0 |
+08:11:56-083810 INFO     LOADER: llama.cpp
+08:11:56-084582 INFO     TRUNCATION LENGTH: 2048
+08:11:56-085278 INFO     INSTRUCTION TEMPLATE: Alpaca
+08:11:56-085904 INFO     Loaded the model in 4.26 seconds.
+08:11:56-086636 INFO     Loading the extension "openai"
+08:11:56-153090 INFO     OpenAI-compatible API URL:
+
+                         http://0.0.0.0:5000
+
+08:11:56-154806 INFO     Loading the extension "gallery"
+Running on local URL:  http://0.0.0.0:7860
+
+To create a public link, set `share=True` in `launch()`.
+```
+
+Looks good! If you get permission issues check your permissions on the /opt/text-generation-webui folder
+
+```
+sudo systemctl daemon-reload
 sudo systemctl enable textgen.service
 sudo systemctl start textgen.service
+sudo systemctl status textgen.service
+● textgen.service
+     Loaded: loaded (/etc/systemd/system/textgen.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2024-01-22 07:53:18 UTC; 5s ago
+   Main PID: 2499 (bash)
+      Tasks: 8 (limit: 18905)
+     Memory: 254.5M
+        CPU: 4.054s
+     CGroup: /system.slice/textgen.service
+             ├─2499 /bin/bash /opt/text-generation-webui/start_linux.sh
+             ├─2512 python one_click.py
+             ├─2517 /bin/sh -c ". \"/opt/text-generation-webui/installer_files/conda/etc/profile.d/conda.sh\" && conda activate \"/opt/text-generation-webui/installer_files/env\" && python server.py  --listen>
+             └─2520 python server.py --listen --api --model Home-3B-v2.q8_0.gguf --n-gpu-layers 33
+
+systemd[1]: Started textgen.service.
 ```
 
 Add the GPU server IP and port (7860) to your Home-LLM integration. 
@@ -214,7 +352,11 @@ Then go under the settings -> voice assistant -> add assistant.
 
 Name your assistant.
 
-Select your conversation agent like Home Assistant or your HomeLLM, etc.
+Select your conversation agent like Home Assistant or your Home LLM, etc.
+
+Home LLM has some options as well that you can play with
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/b8d7fd9f-bc51-4315-89c0-0c5c587bfb8c)
 
 Then drop down the boxes for Faster-Whisper, Piper, and OpenWakeWord. Select the settings you like for each.
 
@@ -334,7 +476,7 @@ Edit the commandha.go file to add your long-lived access token and the IP of you
 ```
 url := "http://HAIPHERE:8123/api/conversation/process" // Replace with your Home Assistant IP
 token := "LONGTOKENHERE" // Replace with your token
-//agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in yaml view or try the name)
+//agentID := "AgentIDHere" // Replace with your agent_id (Can get this with the dev assist console in YAML view or try the name)
 ```
 
 ### AgentID ###
