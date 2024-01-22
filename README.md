@@ -40,6 +40,18 @@ networks:
 
 Clone or download the repository https://github.com/oobabooga/text-generation-webui install it however you please I just run it on the metal of a GPU server.
 
+**Note:** _You currently need an unreleased tag of text-generation-webui to work with the V2 model of Home-LLM which you can get like this until fully released_
+
+```bash
+git clone https://github.com/oobabooga/text-generation-webui.git
+cd text-generation-webui
+git checkout -b llamacpp_0.2.29 origin/llamacpp_0.2.29
+git branch
+git pull
+echo "--listen --api --model Home-3B-v2.q8_0.gguf --n-gpu-layers 33" >> CMD_FLAGS.txt
+./start_linux.sh
+```
+
 Edit CMD_FLAGS.txt before installing uncomment the line `# --listen --api` (Remove the number sign and space) I also added `--model Home-3B-v2.q8_0.gguf --n-gpu-layers 33` for my GPU to start the model on boot.
 
 Run the start_linux.sh, start_windows.bat, start_macos.sh, or start_wsl.bat script depending on your OS.
