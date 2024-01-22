@@ -236,7 +236,39 @@ sudo systemctl status textgen.service
 systemd[1]: Started textgen.service.
 ```
 
-Add the GPU server IP and port (7860) to your Home-LLM integration. 
+Add the GPU server IP and port (5000) to your Home-LLM integration.
+
+Select text-generation-webui API in the dropdown then hit SUBMIT.
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/185ed546-e4ec-4c14-9a16-e77a9b9532c3)
+
+The GPU Server IP that is running text-generation-webui
+
+API Hostname*: 10.0.0.42
+
+The backend port for text-generation-webui 5000 is the default for text-generation-webui (not 7860 which is the webui) 
+
+API Port*: 5000 
+
+Model name has to be the exact same as it looks in the dropdown model list in text-generation-webui
+
+Model Name*: Home-3B-v2_q8_0.gguf
+
+Chat completions endpoint is how the URLs get formed to post data to text-generation-webui without this checked it will use /v1/completions which is depreciated for /v1/chat/completions (Both currently still work but let's think about the future).
+
+[X] Use chat completions endpoint
+
+API Key doesn't matter can type anything or nothing at all.
+
+API key: na
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/09839a50-4f1c-4cc8-8593-9aa241dfdfe2)
+
+Select SUBMIT and hope for Success!
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/09726308-5ecc-400c-86c6-404bdac5a1e4)
+
+![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/a0d0ca6a-b2c4-4014-95db-ba30a45c2e27)
 
 ## Wyoming-Whisper Container for Docker ##
 
