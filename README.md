@@ -624,7 +624,7 @@ Bot 00###### request served.
 
 Carry on...
 ```
-Haven't recieved a conn check from 00###### in 15 seconds, will ping jdocs on next check
+Haven't received a conn check from 00###### in 15 seconds, will ping jdocs on next check
 Broadcasting mDNS now (outside of timer loop)
 Jdocs: Incoming ReadDocs request, Robot ID: vic:00######, Item(s) to return: 
 [doc_name:"vic.AppTokens"]
