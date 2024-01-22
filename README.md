@@ -66,13 +66,14 @@ Select the reload button when it is done downloading (2.8G) the file Home-3B-v2.
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/8899f18c-a6af-4ba8-87b2-ed9719de7820)
 
-
-
+Excerpt from Home-LLM
+```
 Performance of running the model on a Raspberry Pi
 
 The RPI4 4GB that I have was sitting right at 1.5 tokens/sec for prompt eval and 1.6 tokens/sec for token generation when running the Q4_K_M quant. I was reliably getting responses in 30-60 seconds after the initial prompt processing which took almost 5 minutes. It depends significantly on the number of devices that have been exposed as well as how many states have changed since the last invocation because of llama.cpp caches KV values for identical prompt prefixes.
 
 It is highly recommended to set up text-generation-webui on a separate machine that can take advantage of a GPU.
+```
 
 Start-up on boot of the GPU server.
 ```
