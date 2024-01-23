@@ -694,7 +694,7 @@ rest_command:
     url: 'http://10.0.0.111:8080/api-sdk/assume_behavior_control?priority=high&serial=00######'
     method: 'get'
   say_text:
-    url: 'http://10.0.0.111:8080/api-sdk/say_text?text={{ states("textvector") }}&serial=00######'
+    url: 'http://10.0.0.111:8080/api-sdk/say_text?text={{ textvector }}&serial=00######'
     method: 'get'
   release_behavior_control:
     url: 'http://10.0.0.111:8080/api-sdk/release_behavior_control?priority=high&serial=00######'
