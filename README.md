@@ -681,6 +681,50 @@ This is a custom intent or plugin!
 Bot 00###### request served.
 ```
 
+## Extra ##
+
+Automate Vector to say things with his Text-To-Speech engine via HA Automation
+
+Add your WirePod IP and bot serial number to the 3 lines below. 
+
+configuration.yaml
+```yaml
+rest_command:
+  assume_behavior_control:
+    url: 'http://10.0.0.111:8080/api-sdk/assume_behavior_control?priority=high&serial=00######'
+    method: 'get'
+  say_text:
+    url: 'http://10.0.0.111:8080/api-sdk/say_text?text={{ states("textvector") }}&serial=00######'
+    method: 'get'
+  release_behavior_control:
+    url: 'http://10.0.0.111:8080/api-sdk/release_behavior_control?priority=high&serial=00######'
+    method: 'get'
+```
+
+Automation
+```yaml
+alias: Vector Speech
+description: Send text to Vector URL
+trigger:
+  - type: opened
+    platform: device
+    device_id: somedevice
+    entity_id: someentity
+    domain: binary_sensor
+condition: []
+action:
+  - service: rest_command.assume_behavior_control
+    data: {}
+  - delay: "00:00:01"
+  - service: rest_command.say_text
+    data:
+      textvector: "Your family room lights are off"
+  - delay: "00:00:10"
+  - service: rest_command.release_behavior_control
+    data: {}
+mode: single
+```
+
 ## Useful links ##
 
 Wire-Pod Go compile information:
