@@ -10,7 +10,7 @@ Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home As
   - [Home-LLM on a GPU server](#home-llm-on-a-gpu-server)
   - [Wyoming-Whisper Container for Docker](#wyoming-whisper-container-for-docker)
     - [Manual Docker Config](#manual-docker-config)
-  - [Wyoming-Piper Docker Container](wyoming-piper-docker-container)
+  - [Wyoming-Piper Docker Container](#wyoming-piper-docker-container)
     - [Manual Docker Config](#manual-docker-config-1)
   - [Wyoming-OpenWakeWord Container for Docker](#wyoming-openwakeword-container-for-docker)
     - [Manual Docker Config](#manual-docker-config-2)
@@ -24,8 +24,8 @@ Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home As
   - [Compiling](#compiling)
   - [Testing, testing, 123](#testing-testing-123)
 - Other Things
-  - [Extra](extra) HA Vector Voice Announce
-  - [Useful links](useful-links)
+  - [Extra](#extra) HA Vector Voice Announce
+  - [Useful links](#useful-links)
 
 ## YouTube Short ##
 
