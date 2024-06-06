@@ -3,6 +3,30 @@ Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home As
 
 ![vector-vector-robot](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/8ca0d3bf-df97-4cc2-b1a1-89dbe5d1865e)
 
+##### Table of Contents  
+- [YouTube Short](#youtube-short)  
+- Home Assistant
+  - [Home Assistant Container for Docker](#home-assistant-container-for-docker)  
+  - [Home-LLM on a GPU server](#home-llm-on-a-gpu-server)
+  - [Wyoming-Whisper Container for Docker](#wyoming-whisper-container-for-docker)
+    - [Manual Docker Config](#manual-docker-config)
+  - [Wyoming-Piper Docker Container](wyoming-piper-docker-container)
+    - [Manual Docker Config](#manual-docker-config-1)
+  - [Wyoming-OpenWakeWord Container for Docker](#wyoming-openwakeword-container-for-docker)
+    - [Manual Docker Config](#manual-docker-config-2)
+  - [Wyoming Protocol](#wyoming-protocol)
+  - [Home Assistant Groups](#home-assistant-groups)
+- Wire-Pod
+  - [Wire-Pod LXC](#wire-pod-lxc)
+  - [Wire-Pod Docker](#wire-pod-docker)
+  - [Compile](#compile)
+  - [AgentID](#agentid)
+  - [Compiling](#compiling)
+  - [Testing, testing, 123](testing,-testing,-123)
+- Other Things
+  - [Extra](extra) HA Vector Voice Announce
+  - [Useful links](useful-links)
+
 ## YouTube Short ##
 
 [![YouTube Short](https://img.youtube.com/vi/i7WPcnAWji8/0.jpg)](https://www.youtube.com/watch?v=i7WPcnAWji8)
@@ -415,9 +439,87 @@ https://www.home-assistant.io/integrations/group/
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/7d32e0da-0f26-482f-b226-2ccbc8a19b13)
 
+## Wire-Pod LXC ##
+
+I recently switched to using LXC as I was modifying the docker too much. Yes persistent storage would be a lot better for not losing code/settings if you update the docker container. The Docker config is still below but I prefer this option.
+
+/etc/netplan/xx-someautogen.yaml
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp3s0:
+      dhcp4: no
+  bridges:
+    br0:
+      dhcp4: yes
+      interfaces:
+        - enp3s0
+```
+
+```bash
+sudo apt install lxc
+sudo lxc init
+Would you like to use LXD clustering? (yes/no) [default=no]: no
+Do you want to configure a new storage pool? (yes/no) [default=yes]: yes
+Name of the new storage pool [default=default]: default
+Name of the storage backend to use (btrfs, ceph, dir, lvm, zfs) [default=zfs]:
+dir
+Would you like to connect to a MAAS server? (yes/no) [default=no]: no
+Would you like to create a new local network bridge? (yes/no) [default=yes]: yes
+What should the new bridge be called? [default=lxdbr0]: lxdbr0
+What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: auto
+What IPv6 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: auto
+Would you like LXC to be available over the network? (yes/no) [default=no]: yes
+Would you like stale cached images to be updated automatically? (yes/no) [default=yes]: yes
+Would you like a YAML "lxd init" preseed to be printed? (yes/no) [default=no]: yes
+```
+
+```bash
+sudo lxc-create -t download -n wirepod -- --dist ubuntu --release jammy  --arch amd64
+```
+
+```bash
+sudo lxc-ls
+wirepod
+sudo lxc-stop -n wirepod
+```
+
+```bash
+sudo vim /var/lib/lxc/wirepod/config
+# Distribution configuration
+lxc.include = /usr/share/lxc/config/common.conf
+lxc.arch = linux64
+
+# Container specific configuration
+lxc.rootfs.path = dir:/var/lib/lxc/wirepod/rootfs
+lxc.uts.name = wirepod
+lxc.start.auto = 1
+
+# Network configuration
+lxc.net.0.type = veth
+lxc.net.0.link = br0
+lxc.net.0.flags = up
+lxc.net.0.hwaddr = de:ad:be:ef:ca:fe
+```
+
+```bash
+sudo lxc-start -n wirepod
+sudo lxc-attach -n wirepod
+git clone https://github.com/kercre123/wire-pod --depth=1
+cd wire-pod
+sudo STT=vosk ./setup.sh
+./setup.sh daemon-enable
+systemctl start wire-pod
+systemctl status wire-pod
+```
+
 ## Wire-Pod Docker ##
 
-I use docker to run Vector with Wire-Pod my configuration looks like this:
+For docker you will need to look at how to add a docker container to a bridge so that it grabs the IP from your router and not the docker subnet. ( I was using the docker-net-dhcp plugin. On newer versions of docker you may have to look for an issue on their tracker about freezing on boot which I was in and list how to compile it to get it working properly. https://github.com/devplayer0/docker-net-dhcp/issues/23#issuecomment-1967410354 ) but there are other things like [macvlan](https://docs.docker.com/network/drivers/macvlan/) [ipvlan](https://docs.docker.com/network/drivers/ipvlan/) etc. (I was having issues with them where they can't communicate to the host properly that is why I was using the plugin)
+
+I use to use docker to run Vector with Wire-Pod my old configuration looks like this:
 
 ```docker
 FROM ubuntu:latest
