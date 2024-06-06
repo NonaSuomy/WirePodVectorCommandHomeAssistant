@@ -22,7 +22,7 @@ Wire-Pod GO plugin for Anki Vector Robot to talk to and send commands to Home As
   - [Compile](#compile)
   - [AgentID](#agentid)
   - [Compiling](#compiling)
-  - [Testing, testing, 123](testing,-testing,-123)
+  - [Testing, testing, 123](#testing-testing-123)
 - Other Things
   - [Extra](extra) HA Vector Voice Announce
   - [Useful links](useful-links)
