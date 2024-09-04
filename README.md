@@ -618,6 +618,8 @@ token := "LONGTOKENHERE" // Replace with your token
 
 ### AgentID ###
 
+**Note:** _Uncommenting AgentID stuff in the code is not required to use the default HA agent! It is an optional setting when you have multiple agents that are not the default agent in Home Assistant. Uncommenting these in the go code and not setting the AgentID properly may give you HTML status codes that you can't see and may not work. Test the default agent before using this._
+
 If you want Vector to use a specific Agent ID you setup for him under assist manager. You need to uncomment these three lines and add your agentID := "################################" etc, to the middle one. Otherwise, it will use the default one.
 
 ![image](https://github.com/NonaSuomy/WirePodVectorCommandHomeAssistant/assets/1906575/c155cd51-62f9-414b-9b48-b07f6b3e009c)
